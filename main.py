@@ -11,8 +11,8 @@ st.set_page_config(
 with st.sidebar:
     selected = option_menu(
         'PawSome AI',
-        ['Welcome', 'Petcare', 'ChatBot', 'About', 'Feedback'],
-        icons=['house-door-fill', 'robot', 'chat-right-fill', 'info', 'star'],
+        ['Welcome', 'Petcare', 'ChatBot','Prescription-Analyzer', 'About', 'Feedback'],
+        icons=['house-door-fill', 'robot', 'chat-right-fill', 'file-earmark-break-fill', 'info', 'star'],
         menu_icon="🐶",
         default_index=0
     )
@@ -21,7 +21,17 @@ if selected == 'Welcome':
     import welcome
     welcome.welcome()
 
+
+if selected == 'Petcare':
+    import model
+    model.model()
+
+
 if selected == 'ChatBot':
     import chatbot
-    st.info("ChatBot selected")  # Debug statement
     chatbot.chatbot()
+
+if selected == 'Prescription-Analyzer':
+    import prescription
+    prescription.presc_analyze()
+
