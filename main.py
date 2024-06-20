@@ -17,7 +17,7 @@ with st.sidebar:
     selected = option_menu(
         'PawSome AI',
         ['Welcome', 'Disease & Breed Detection', 'Petcare ChatBot', 'Prescription-Analyzer', 'About', 'Feedback'],
-        icons=['house-door-fill', 'robot', 'chat-right-fill', 'file-earmark-break-fill', 'info', 'star'],
+        icons=['house-door-fill', 'search', 'chat-right-fill', 'file-earmark-break-fill', 'info', 'star'],
         menu_icon="🐶",
         default_index=0
     )
@@ -26,14 +26,18 @@ if selected == 'Welcome':
     import welcome
     welcome.welcome()
 
-if selected == 'Petcare':
+if selected == 'Disease & Breed Detection':
     import model
     model.model()
 
-if selected == 'ChatBot':
+if selected == 'Petcare ChatBot':
     import chatbot
     chatbot.chatbot()
 
 if selected == 'Prescription-Analyzer':
     import prescription
     prescription.presc_analyze()
+
+if selected == 'Feedback':
+    import feedback
+    feedback.feedback()
