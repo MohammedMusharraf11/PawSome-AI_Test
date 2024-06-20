@@ -44,7 +44,7 @@ def chatbot():
     def get_conversational_chain():
         prompt_template = """
         Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
-        provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
+        provided context then go and find and provide the answer don't provide the wrong answer and your a expert in pet-care so make sure all your responses are within that.\n\n
         Context:\n {context}?\n
         Question: \n{question}\n
 
@@ -70,19 +70,19 @@ def chatbot():
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    with st.form(key="uploader_form"):
-        pdf_docs = st.file_uploader("Upload your PDF Files", accept_multiple_files=True)
-        submit_button = st.form_submit_button(label="Submit & Process")
-
-    if submit_button:
-        if pdf_docs:
-            with st.spinner("Processing..."):
-                raw_text = get_pdf_text(pdf_docs)
-                text_chunks = get_text_chunks(raw_text)
-                get_vector_store(text_chunks)
-                st.success("Processing completed successfully.")
-        else:
-            st.warning("Please upload at least one PDF file.")
+# Uncomment if you want to add your own-custom pdf:
+    # with st.form(key="uploader_form"):
+    #     pdf_docs = st.file_uploader("Upload your PDF Files", accept_multiple_files=True)
+    #     submit_button = st.form_submit_button(label="Submit & Process")
+    # if submit_button:
+    #     if pdf_docs:
+    #         with st.spinner("Processing..."):
+    #             raw_text = get_pdf_text(pdf_docs)
+    #             text_chunks = get_text_chunks(raw_text)
+    #             get_vector_store(text_chunks)
+    #             st.success("Processing completed successfully.")
+    #     else:
+    #         st.warning("Please upload at least one PDF file.")
 
     # Display chat messages from history on app rerun
     for message in st.session_state.messages:

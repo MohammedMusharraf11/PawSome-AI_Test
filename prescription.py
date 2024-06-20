@@ -3,7 +3,8 @@ import os
 from PIL import Image
 import google.generativeai as genai
 from dotenv import load_dotenv
-from scrap import search_medicine_1mg  # Import the scraper function
+from mysrap import search_medicine_supertails
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 def presc_analyze():
     # Load environment variables
@@ -14,7 +15,14 @@ def presc_analyze():
 
     # Function to load Gemini Vision Pro model and get response
     def get_gemini_response(input_prompt, image_data, user_prompt):
-        model = genai.GenerativeModel("gemini-pro-vision")
+        # model = genai.GenerativeModel("gemini-pro-vision")
+        safety_settings={
+        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+        HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+        # HarmCategory.HARM_CATEGORY_DANGEROUS: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+        HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+    }
+        model = genai.GenerativeModel("gemini-pro-vision",safety_settings=safety_settings)
         response = model.generate_content([input_prompt, image_data[0], user_prompt])
         return response.text
 
@@ -59,7 +67,7 @@ def presc_analyze():
     Please consider the following information: {user_prompt}"""
 
     # System prompt for extracting medicine names (heuristic)
-    medicine_prompt = "Please list all the medications mentioned in the prescription."
+    medicine_prompt = "Please list all the medications mentioned in the prescription.Make sure that you just give medicine name with strength."
 
     if submit:
         image_data = input_image_setup(uploaded_file)
@@ -83,10 +91,10 @@ def presc_analyze():
             st.subheader("Medicines with Links:")
             for medicine in medicine_names:
                 st.markdown(f"### {medicine}")
-                results_df = search_medicine_1mg(medicine)
+                results_df = search_medicine_supertails(medicine)
                 if results_df is not None and not results_df.empty:
                     for index, row in results_df.head(7).iterrows():
-                        st.markdown(f"[{row['Product name']}]({row['Link']}) - {row['Price']} ₹")
+                        st.markdown(f"[{row['Product Name']}]({row['Link']}) - {row['Price']} ₹")
                 else:
                     st.write(f"No results found for {medicine}")
         else:

@@ -1,43 +1,61 @@
 import streamlit as st
 
 def welcome():
-    
-
-    # Home page content
+    # Logo and main heading
+    st.image("logo-hd.png", width=200)
     st.title("Welcome to PawSome-AI 🐾")
-    st.subheader("Your AI-Powered Pet Care Assistant")
+    st.write("Your AI-Powered Pet Care Assistant")
+    st.markdown("---")  # Horizontal line
 
+    # Main layout with two columns
+    col1, col2 = st.columns(2)
+
+    # Key Features section centered (Column 1)
+    with col1:
+        st.markdown("""
+        <div style="background-color:#e5f7fa; padding:20px; border-radius:10px; text-align:center;">
+        <h3 style="color:#007a87;">Key Features</h3>
+        <p style="color:#333333;">Explore the capabilities that PawSome-AI offers to enhance your pet care experience:</p>
+        <ul style="text-align:left;">
+        <li><strong>Dog Breed Identification and Disease Detection</strong><br>
+        Upload images to identify your dog's breed and detect diseases. Get detailed information on symptoms, precautions, and treatments.</li><br>
+
+        <li><strong>Pet Care Chatbot</strong><br>
+        Interactive chatbot for pet-care-related queries and advice. Receive personalized recommendations on nutrition, grooming, behavior, and more.</li><br>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Additional Key Features (Column 2)
+    with col2:
+        st.markdown("""
+        <div style="background-color:#e5f7fa; padding:20px; border-radius:10px;">
+        <h3 style="color:#007a87;">Additional Key Features</h3>
+        <ul style="text-align:left;">
+        <li><strong>Prescription Analyzer</strong><br>
+         Upload veterinary prescriptions to manage your pet's medications effectively
+         Get detailed information about medications listed in the prescription. 
+         <br>
+                  
+         
+        <li><strong>Contact and Feedback</strong><br>
+        Contact form for inquiries and feedback collection. Reach out to us for any questions or suggestions.</li><br>
+
+        <li><strong>Future Features</strong><br>
+        Planned enhancements to further assist pet owners. Suggestions are welcomed. </li><br>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # How to Use section centered (Spanning both columns)
     st.markdown("""
-    ### About PawSome-AI
-    PawSome-AI is a comprehensive web application designed to assist pet owners with various aspects of pet care using advanced AI technologies. Our app offers a range of features to help you better understand and take care of your pets.
-
-    ### Key Features
-
-    1. **Dog Breed Identification and Disease Detection**
-       - Upload images of your dog or any infected area.
-       - Our AI model identifies the breed of the dog.
-       - Detects potential diseases from the images.
-       - Provides symptoms, precautions, and possible medications for detected diseases.
-
-    2. **Pet Care Chatbot**
-       - Interactive chatbot for pet-care-related queries.
-       - Utilizes the LLMA index to provide information from a pet-care encyclopedia.
-       - Speaks responses to enhance user experience.
-
-    3. **Future Feature: Prescription Analyzer**
-       - Upload images of veterinary prescriptions.
-       - Our planned feature will interpret and provide details on the medication and dosage.
-
-    4. **Contact and Feedback**
-       - Contact form for user inquiries.
-       - Feedback form to collect user suggestions and improvements.
-
-    ### How to Use
-    - Navigate through the app using the sidebar.
-    - Start with uploading an image on the 'Dog Breed and Disease Detection' page.
-    - Interact with our pet care chatbot for any questions.
-    - Stay tuned for the upcoming 'Prescription Analyzer' feature.
-    - Use the 'Contact' page to reach out to us and the 'Feedback' page to provide your valuable suggestions.
-
-    We hope PawSome-AI makes pet care easier and more effective for you. Thank you for using our app!
-    """)
+    <div style="background-color:#f9f9f9; padding:20px; border-radius:10px; text-align:center;">
+    <h3 style="color:#4d4d4d;">How to Use</h3>
+    <ul style="text-align:left;">
+    <li>Navigate through the app using the sidebar menu on the left.</li>
+    <li>Upload an image to detect dog breeds and diseases.</li>
+    <li>Interact with the chatbot for personalized pet care advice.</li>
+    <li>Use the Prescription Analyzer to manage your pet's medications.</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
